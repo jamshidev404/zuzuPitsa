@@ -1,4 +1,5 @@
 export const ADDORDER = "ADDORDER";
+export const GETPRODUCT = "GETPRODUCT";
 
 const initialState = {
   data: [
@@ -131,18 +132,19 @@ const initialState = {
     },
   ],
 
-  orders: [
-  
-  ],
+  orders: [],
 };
 
-export const productReducer = (state = initialState, action) => {
+export const productReducer = (state = initialState, action, payload) => {
   switch (action.type) {
-    case "ADDORDER":
+    case ADDORDER:
       return { ...state, orders: [{ ...action.newOrder }, ...state.orders] };
+    case GETPRODUCT:
+      return { ...state, payload };
     default:
       return state;
   }
 };
 
 export const addOrderAction = (newOrder) => ({ type: "ADDORDER", newOrder });
+export const getProductsAction = (data) => ({ type: "GETPRODUCT", data });

@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "@mui/material/Modal";
 import Order from "../Order/Order";
 import { addOrderAction } from "../../redux/productReducer";
+import SideBar from "../SideBar/Sidebar";
+import axios from "axios";
+import { useEffect } from "react";
 
 export const Context = createContext(null);
 
@@ -19,8 +22,6 @@ const Home = () => {
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
 
-  console.log(orders);
-
   const onProductButtonClick = (id) => {
     const products = data.reduce((total, el) => [...total, ...el.products], []);
     setcurrentProduct(products.find((el) => el.id === id));
@@ -28,11 +29,27 @@ const Home = () => {
   };
 
   const addToOrders = (currentProduct, count) => {
-    console.log(currentProduct, count);
-    const newProduct = { ...currentProduct, count };
+    const newProduct = {
+      ...currentProduct,
+      count,
+      totalSum: currentProduct.price * count,
+    };
     dispatch(addOrderAction(newProduct));
     handleClose();
   };
+
+  useEffect(() => {
+    const response = axios
+      .get("https://fakestoreapi.com/products")
+      .then(() => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  });
+
+  const formatCategories = (arr) => {};
 
   const states = {
     handleOpen,
@@ -43,6 +60,8 @@ const Home = () => {
   return (
     <>
       <Context.Provider value={states}>
+        const getting = formatCategories(data)
+        <SideBar />
         <Korzinka />
         <Banner />
         {data.map((el) => (

@@ -2,7 +2,7 @@ import pizza from "../../Images/pizza1.png";
 import styles from "./Order.module.scss";
 import { CloseIcon } from "../../Images/svg";
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useState } from "react"; 
 
 const Order = ({ product, onClickClose, addToOrders }) => {
   const [count, setCount] = useState(1);
