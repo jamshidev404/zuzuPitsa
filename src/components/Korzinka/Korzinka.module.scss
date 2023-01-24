@@ -1,0 +1,201 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  .left {
+    width: 70%;
+    background-color: #fff;
+    padding: 10px 24px 16px 24px;
+    border-radius: 12px;
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .title {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        color: #292929;
+      }
+
+      .remove {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        // margin-bottom: 21px;
+      }
+    }
+    .line {
+      height: 1px;
+      width: 100%;
+      background-color: rgb(215, 209, 209);
+      margin-bottom: 16px;
+    }
+
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .bottom__left {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        gap: 12px;
+        .img {
+          img {
+            width: 72px;
+            height: 73px;
+          }
+        }
+
+        .wrrap {
+          .bottom__title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            color: #292929;
+            margin-bottom: 8px;
+          }
+          .bottom__type {
+            font-size: 16px;
+            line-height: 20px;
+            color: #808080;
+          }
+        }
+      }
+
+      .bottom__right {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        .bottom__price {
+          font-weight: 600;
+          font-size: 16px;
+          line-height: 20px;
+          text-align: center;
+          color: #292929;
+        }
+
+        .count {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+
+          .decr {
+            width: 40px;
+            height: 40px;
+            background: #f2f2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: x-large;
+          }
+
+          .bottom__count {
+            font-size: x-large;
+          }
+
+          .incr {
+            width: 40px;
+            height: 40px;
+            background: #f2f2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: x-large;
+          }
+        }
+      }
+    }
+  }
+
+  .right {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 16px 24px;
+
+    .title {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #292929;
+      margin-bottom: 16px;
+    }
+
+    .line {
+      height: 1px;
+      width: 100%;
+      background-color: rgb(215, 209, 209);
+      margin-bottom: 16px;
+    }
+
+    .all__orders {
+    }
+
+    .all__products {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      .pizza__name {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #292929;
+      }
+
+      .price {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #292929;
+      }
+    }
+
+    .delivery {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      .deli {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #292929;
+      }
+
+      .full__price {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #292929;
+      }
+    }
+
+    .main__price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+
+      div {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: right;
+        color: #292929;
+      }
+    }
+  }
+}

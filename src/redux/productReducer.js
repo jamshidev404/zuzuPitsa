@@ -1,9 +1,12 @@
+export const ADDORDER = "ADDORDER";
+
 const initialState = {
   data: [
     {
       category: "pizza",
       products: [
         {
+          id: "ft46yh6",
           image: "../../Images/pizza1.png",
           title: "Барбекюm",
           description:
@@ -11,6 +14,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "67ujbgy5g",
           image: "../../Images/pizza2.png",
           title: "Барбекюnop",
           description:
@@ -18,6 +22,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "56788",
           image: "../../Images/pizza3.png",
           title: "Барбекюpo",
           description:
@@ -25,6 +30,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "g45b6d",
           image: "../../Images/pizza1.png",
           title: "Барбекюsz",
           description:
@@ -32,6 +38,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "gv456b5",
           image: "../../Images/pizza2.png",
           title: "Барбекюmu",
           description:
@@ -39,6 +46,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "g45yg",
           image: "../../Images/pizza3.png",
           title: "Барбекюny",
           description:
@@ -46,6 +54,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "f45yb",
           image: "../../Images/pizza1.png",
           title: "Барбекюt",
           description:
@@ -53,6 +62,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "g5u7h4",
           image: "../../Images/pizza2.png",
           title: "Барбекюse",
           description:
@@ -60,6 +70,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "g54",
           image: "../../Images/pizza3.png",
           title: "Барбекюmv",
           description:
@@ -67,6 +78,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "rgb45",
           image: "../../Images/pizza1.png",
           title: "Барбекюnee",
           description:
@@ -79,6 +91,7 @@ const initialState = {
       category: "pasta",
       products: [
         {
+          id: "vgr",
           image: "../../Images/pasta.png",
           title: "Барбекюmw",
           description:
@@ -86,6 +99,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "vrbg",
           image: "../../Images/pasta.png",
           title: "Барбекюnaa",
           description:
@@ -98,6 +112,7 @@ const initialState = {
       category: "salat",
       products: [
         {
+          id: "derh",
           image: "../../Images/salat.png",
           title: "Барбекюmk",
           description:
@@ -105,6 +120,7 @@ const initialState = {
           price: 74000,
         },
         {
+          id: "dede",
           image: "../../Images/salat.png",
           title: "Барбекюnn",
           description:
@@ -114,13 +130,19 @@ const initialState = {
       ],
     },
   ],
+
+  orders: [
+  
+  ],
 };
 
 export const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "":
-      return {};
+    case "ADDORDER":
+      return { ...state, orders: [{ ...action.newOrder }, ...state.orders] };
     default:
       return state;
   }
 };
+
+export const addOrderAction = (newOrder) => ({ type: "ADDORDER", newOrder });

@@ -184,9 +184,56 @@ export const TelegramSvg = () => (
 );
 
 export const strelkaSvg = () => (
-  <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M7.01587 14.9405L11.9059 10.0505C12.4834 9.47305 12.4834 8.52805 11.9059 7.95055L7.01587 3.06055" stroke="#151A24" strokeWidth="2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+  <svg
+    width='19'
+    height='18'
+    viewBox='0 0 19 18'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M7.01587 14.9405L11.9059 10.0505C12.4834 9.47305 12.4834 8.52805 11.9059 7.95055L7.01587 3.06055'
+      stroke='#151A24'
+      strokeWidth='2'
+      strokeMiterlimit='10'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
   </svg>
-  
+);
+
+export const CloseIcon = () => (
+  <svg
+    width='24'
+    height='24'
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M4 4L20 20'
+      stroke='#292929'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+    <path
+      d='M20 4L4 20'
+      stroke='#292929'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    />
+  </svg>
+);
+
+export const RemoveSVG = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14 10L14 17" stroke="#14181F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M10 10L10 17" stroke="#14181F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M18 6H6V20C6 20.5523 6.44772 21 7 21H17C17.5523 21 18 20.5523 18 20V6Z" stroke="#14181F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M4 6H20" stroke="#14181F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M15 3H9C8.44772 3 8 3.44772 8 4V6H16V4C16 3.44772 15.5523 3 15 3Z" stroke="#14181F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+</svg>
 
 )
