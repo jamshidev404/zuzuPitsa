@@ -22,10 +22,25 @@ const Home = () => {
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
 
+  const formatCategories = (arr) => {
+    const categories = arr.reduce(
+      (total, v) =>
+        total.includes(v.category) ? total : [...total, v.category],
+      []
+    );
+    return categories.reduce((total, category) => {
+      return [
+        ...total,
+        { category, products: arr.filter((e) => e.category === category) },
+      ];
+    }, []);
+  };
+
+
   const onProductButtonClick = (id) => {
-    const products = data.reduce((total, el) => [...total, ...el.products], []);
-    setcurrentProduct(products.find((el) => el.id === id));
     handleOpen();
+    // const products = data.reduce((total, el) => [...total, ...el.products], []);
+    setcurrentProduct(data.find((el) => el.id === id));
   };
 
   const addToOrders = (currentProduct, count) => {
@@ -48,23 +63,7 @@ const Home = () => {
       .catch((error) => {
         console.log(error.message);
       });
-  },[]);
-
-  const formatCategories = (arr) => {
-    const categories = arr.reduce(
-      (total, v) =>
-        total.includes(v.category) ? total : [...total, v.category],
-      []
-    );
-    return categories.reduce((total, category) => {
-      return [
-        ...total,
-        { category, products: arr.filter((e) => e.category === category) },
-      ];
-    }, []);
-  };
-
-  console.log("bu format", formatCategories);
+  }, []);
 
   const states = {
     handleOpen,
@@ -75,7 +74,6 @@ const Home = () => {
   const getting = formatCategories(data);
   return (
     <>
-      {console.log(getting) }
       <Context.Provider value={states}>
         <SideBar />
         <Korzinka />
