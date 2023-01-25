@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "./mock/routes";
-import { useSelector } from "react-redux";
 
 function App() {
   return (

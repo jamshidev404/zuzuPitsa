@@ -6,7 +6,6 @@ import { Context } from "../Home/Home";
 
 function CardComponent({ category, products }) {
   const { onProductButtonClick } = useContext(Context);
-
   return (
     <>
       <div className={styles.products}>
@@ -15,8 +14,8 @@ function CardComponent({ category, products }) {
           <div className={styles.items}>
             {products.map((product) => (
               <div key={product.id} className={styles.card}>
-                <img className={styles.card__image} src={pizza} />
-                <div className={styles.card__body}>
+                <img className={styles.card__image} src={product.image} />
+                <div key={product.id} className={styles.card__body}>
                   <div className={styles.card__title}>{product.title}</div>
                   <div className={styles.card__description}>
                     {product.description}
@@ -27,9 +26,11 @@ function CardComponent({ category, products }) {
                     От {product.price} сумов
                   </div>
                   <div
-                    onClick={() => {onProductButtonClick(product.id)}}
+                    onClick={() => {
+                      onProductButtonClick(product.id);
+                    }}
                     className={styles.card__button}
-                  > 
+                  >
                     <Button variant='card'>Выбрать</Button>
                   </div>
                 </div>

@@ -6,7 +6,7 @@ import CardComponent from "../CardComponent/CardComponent";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "@mui/material/Modal";
 import Order from "../Order/Order";
-import { addOrderAction } from "../../redux/productReducer";
+import { addOrderAction, getProductsAction } from "../../redux/productReducer";
 import SideBar from "../SideBar/Sidebar";
 import axios from "axios";
 import { useEffect } from "react";
@@ -39,17 +39,32 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const response = axios
+    axios
       .get("https://fakestoreapi.com/products")
-      .then(() => {
-        console.log(response);
+      .then((response) => {
+        console.log();
+        dispatch(getProductsAction(response.data));
       })
       .catch((error) => {
         console.log(error.message);
       });
-  });
+  },[]);
 
-  const formatCategories = (arr) => {};
+  const formatCategories = (arr) => {
+    const categories = arr.reduce(
+      (total, v) =>
+        total.includes(v.category) ? total : [...total, v.category],
+      []
+    );
+    return categories.reduce((total, category) => {
+      return [
+        ...total,
+        { category, products: arr.filter((e) => e.category === category) },
+      ];
+    }, []);
+  };
+
+  console.log("bu format", formatCategories);
 
   const states = {
     handleOpen,
@@ -57,18 +72,19 @@ const Home = () => {
     addToOrders,
   };
 
+  const getting = formatCategories(data);
   return (
     <>
+      {console.log(getting) }
       <Context.Provider value={states}>
-        const getting = formatCategories(data)
         <SideBar />
         <Korzinka />
         <Banner />
-        {data.map((el) => (
+        {getting?.map((el) => (
           <CardComponent
-            key={el.category}
-            category={el.category}
-            products={el.products}
+            key={el?.category}
+            category={el?.category}
+            products={el?.products}
           />
         ))}
         <Modal
