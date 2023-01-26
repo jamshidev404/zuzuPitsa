@@ -1,13 +1,11 @@
 import { createContext, useState } from "react";
 import Korzinka from "../Korzinka/Korzinka";
 import Banner from "../Banner/Banner";
-import styles from "./Home.module.scss";
 import CardComponent from "../CardComponent/CardComponent";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "@mui/material/Modal";
 import Order from "../Order/Order";
 import { addOrderAction, getProductsAction } from "../../redux/productReducer";
-import SideBar from "../SideBar/Sidebar";
 import axios from "axios";
 import { useEffect } from "react";
 
@@ -15,7 +13,7 @@ export const Context = createContext(null);
 
 const Home = () => {
   const data = useSelector((state) => state.products.data);
-  const orders = useSelector((state) => state.products.orders);
+  // const orders = useSelector((state) => state.products.orders);
   const [currentProduct, setcurrentProduct] = useState({});
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -35,7 +33,6 @@ const Home = () => {
       ];
     }, []);
   };
-
 
   const onProductButtonClick = (id) => {
     handleOpen();
@@ -75,8 +72,8 @@ const Home = () => {
   return (
     <>
       <Context.Provider value={states}>
-        <SideBar />
-        <Korzinka />
+        {/* <SideBar /> */}
+
         <Banner />
         {getting?.map((el) => (
           <CardComponent

@@ -1,23 +1,29 @@
-import pizza from "../../Images/pizza1.png";
 import styles from "./Order.module.scss";
 import { CloseIcon } from "../../Images/svg";
 import { Button } from "@mui/material";
-import { useState } from "react"; 
+import { useState } from "react";
+import { incrActionCreator, decrActionCreator } from "../../redux/productReducer";
+import { useDispatch, useSelector, } from "react-redux";
+
 
 const Order = ({ product, onClickClose, addToOrders }) => {
   const [count, setCount] = useState(1);
+  const data = useSelector((state) => state.products.orders)
+  const dispatch = useDispatch()
 
-  const Incr = () => {
+  const Incr = (id) => {
     setCount(count + 1);
+    // dispatch(incrActionCreator(id))
   };
 
-  const Decr = () => {
+  const Decr = (id) => {
     if (count > 1) setCount(count - 1);
+    // dispatch(decrActionCreator(id))
   };
 
   return (
     <div className={styles.order}>
-      <img className={styles.order__image} src={pizza} />
+      <img className={styles.order__image} src={product.image} alt='' />
       <div className={styles.order__content}>
         <div onClick={onClickClose} className={styles.content__button}>
           <CloseIcon />
@@ -27,7 +33,9 @@ const Order = ({ product, onClickClose, addToOrders }) => {
         <div className={styles.content__buttons}>
           <div className={styles.content__counter}>
             <Button
-              onClick={Decr}
+              onClick={() => {
+                Decr(product.id)
+              } }
               variant='contained'
               style={{
                 background: "#f5f5f5",
@@ -44,7 +52,9 @@ const Order = ({ product, onClickClose, addToOrders }) => {
             </Button>
             <span className={styles.content__count}>{count}</span>
             <Button
-              onClick={Incr}
+              onClick={()=> {
+                Incr(product.id)
+              }}
               variant='contained'
               style={{
                 background: "#f5f5f5",
@@ -62,16 +72,21 @@ const Order = ({ product, onClickClose, addToOrders }) => {
           </div>
           <div className={styles.content__add}>
             <Button
-            onClick={() => {addToOrders(product, count)}}
+              onClick={() => {
+                addToOrders(product,count);
+              }}
               variant='contained'
-              sx={{
+              style={{
                 background: "#ec8d1e",
                 borderRadius: 100,
-                color: "white",
+                color: "#fff",
+                fontSize: "50px",
+                textTransform: "lowercase",
+                minWidth: 300
               }}
               size='large'
               startIcon={"Добавить"}
-              endIcon={`${product.price * count}`}
+              endIcon={`${product.price * count}000 so'm`}
             ></Button>
           </div>
         </div>

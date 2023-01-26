@@ -1,151 +1,67 @@
-export const ADDORDER = "ADDORDER";
-export const GETPRODUCT = "GETPRODUCT";
+export const ADD_ORDER = "ADD_ORDER";
+export const GET_PRODUCT = "GET_PRODUCT";
+export const CLEAR_ALL_ORDERS = "CLEAR_ALL_ORDERS";
+export const DELETE_ITEM = "DELETE_ITEM";
+export const ORDER_COUNT_INCR_ACTION = "ORDER_COUNT_INCR_ACTION";
+export const ORDER_COUNT_DECR_ACTION = "ORDER_COUNT_DECR_ACTION";
 
 const initialState = {
-  data: [
-    // {
-    //   category: "pizza",
-    //   products: [
-    //     {
-    //       id: "ft46yh6",
-    //       image: "../../Images/pizza1.png",
-    //       title: "Барбекюm",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "67ujbgy5g",
-    //       image: "../../Images/pizza2.png",
-    //       title: "Барбекюnop",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "56788",
-    //       image: "../../Images/pizza3.png",
-    //       title: "Барбекюpo",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "g45b6d",
-    //       image: "../../Images/pizza1.png",
-    //       title: "Барбекюsz",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "gv456b5",
-    //       image: "../../Images/pizza2.png",
-    //       title: "Барбекюmu",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "g45yg",
-    //       image: "../../Images/pizza3.png",
-    //       title: "Барбекюny",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "f45yb",
-    //       image: "../../Images/pizza1.png",
-    //       title: "Барбекюt",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "g5u7h4",
-    //       image: "../../Images/pizza2.png",
-    //       title: "Барбекюse",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "g54",
-    //       image: "../../Images/pizza3.png",
-    //       title: "Барбекюmv",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "rgb45",
-    //       image: "../../Images/pizza1.png",
-    //       title: "Барбекюnee",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //   ],
-    // },
-    // {
-    //   category: "pasta",
-    //   products: [
-    //     {
-    //       id: "vgr",
-    //       image: "../../Images/pasta.png",
-    //       title: "Барбекюmw",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "vrbg",
-    //       image: "../../Images/pasta.png",
-    //       title: "Барбекюnaa",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //   ],
-    // },
-    // {
-    //   category: "salat",
-    //   products: [
-    //     {
-    //       id: "derh",
-    //       image: "../../Images/salat.png",
-    //       title: "Барбекюmk",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //     {
-    //       id: "dede",
-    //       image: "../../Images/salat.png",
-    //       title: "Барбекюnn",
-    //       description:
-    //         "Томатный соус, говядина, маслины булочка гамбургер, соленые...",
-    //       price: 74000,
-    //     },
-    //   ],
-    // },
-  ],
-
+  data: [],
   orders: [],
 };
 
-export const productReducer = (state = initialState, action, payload) => {
+export const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADDORDER:
-      return { ...state, orders: [{ ...action.newOrder }, ...state.orders] };
-    case GETPRODUCT:
-      console.log("set+data");
+    case ADD_ORDER:
+      const findProduct = state.orders.find((el) => el.id == action.id);
+
+      return {
+        ...state,
+        orders: [
+          { ...(action.newProduct ? findProduct : action.newProduct) },
+          ...state.orders,
+        ],
+      };
+    case GET_PRODUCT:
       return { ...state, data: [...action.data] };
+    case DELETE_ITEM:
+      const filteredOrders = state.orders.filter((el) => el.id !== action.id);
+      if(filteredOrders !== -1) {
+        return {
+          ...state,
+          orders: [...filteredOrders],
+        }
+      }
+      return {
+        ...state,
+        orders: [...filteredOrders],
+      };
+    case CLEAR_ALL_ORDERS:
+      return { ...state, orders: [] };
+    case ORDER_COUNT_INCR_ACTION:
+      const incrOrder = state.orders.find((el) => el.id === action.id);
+      return { ...state, order_incr: [...(incrOrder + 1)] };
+    case ORDER_COUNT_DECR_ACTION:
+      const decrOrder = state.orders.find((el) => el.id === action.id);
+      return { ...state, order_decr: [...(decrOrder - 1)] };
     default:
       return state;
   }
 };
 
-export const addOrderAction = (newOrder) => ({ type: "ADDORDER", newOrder });
-export const getProductsAction = (data) => ({ type: "GETPRODUCT", data });
+export const addOrderAction = (newProduct, id) => ({
+  type: ADD_ORDER,
+  newProduct,
+  id,
+});
+export const getProductsAction = (data) => ({ type: GET_PRODUCT, data });
+export const deleteItemAction = (id) => ({ type: DELETE_ITEM, id });
+export const deleteAllOrdersAction = () => ({ type: CLEAR_ALL_ORDERS });
+export const incrActionCreator = (id) => ({
+  type: ORDER_COUNT_INCR_ACTION,
+  id,
+});
+export const decrActionCreator = (id) => ({
+  type: ORDER_COUNT_DECR_ACTION,
+  id,
+});

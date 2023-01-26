@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import styles from "./CardComponent.module.scss";
 import Button from "../Button/Button";
-import pizza from "../../Images/pizza1.png";
 import { Context } from "../Home/Home";
 
 function CardComponent({ category, products }) {

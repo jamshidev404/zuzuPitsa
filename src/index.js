@@ -10,16 +10,13 @@ import { productReducer } from "./redux/productReducer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const reducers = combineReducers({ products: productReducer })
-const store = createStore(reducers)
+const reducers = combineReducers({ products: productReducer });
+const store = createStore(reducers);
 
 root.render(
-  <div className='wrapper'>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </div>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
-    

@@ -1,63 +1,115 @@
-import { Button } from "@mui/material";
-import React from "react";
 import { RemoveSVG, CloseIcon } from "../../Images/svg";
-import Order from "../Order/Order";
 import styles from "./Korzinka.module.scss";
-import pizza from "../../Images/pizza1.png";
+import { Button } from "@mui/material";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteItemAction,
+  deleteAllOrdersAction,
+  incrActionCreator,
+  decrActionCreator,
+} from "../../redux/productReducer";
 
 const Korzinka = () => {
+  const data = useSelector((state) => state.products.orders);
+  const [count, setCount] = useState(1);
+  const dispatch = useDispatch();
+
+  const Incr = (id) => {
+    dispatch(incrActionCreator(id));
+  };
+  const Decr = (id) => {
+    dispatch(decrActionCreator(id));
+  };
+
+  const deleteItem = (id) => {
+    dispatch(deleteItemAction(id));
+  };
+
+  const deleteAll = () => {
+    dispatch(deleteAllOrdersAction());
+  };
+
   return (
     <>
-      <div className={styles.wrap}>
+      <div className={`${styles.wrap} container`}>
         <div className={styles.left}>
           <div className={styles.top}>
             <div className={styles.title}>Корзина</div>
-            <div className={styles.remove}>
+            <div onClick={deleteAll} className={styles.remove}>
               <RemoveSVG /> Очистить корзину
             </div>
           </div>
           <div className={styles.line}></div>
-          <div className={styles.bottom}>
-            <div className={styles.bottom__left}>
-              <div className={styles.img}>
-                <img src={pizza} alt='' />
+          {data.map((el) => (
+            <div className={styles.bottom}>
+              <div className={styles.bottom__left}>
+                <div className={styles.img}>
+                  <img src={el.image} alt='' />
+                </div>
+                <div className={styles.wrrap}>
+                  <div className={styles.bottom__title}>{el.title}</div>
+                  <div className={styles.bottom__type}>{el.type}</div>
+                </div>
               </div>
-              <div className={styles.wrrap}>
-                <div className={styles.bottom__title}>Пицца кебаб</div>
-                <div className={styles.bottom__type}>Средняя, Воздушное</div>
+              <div className={styles.bottom__right}>
+                <div className={styles.bottom__price}>
+                  {el.price * count} so'm
+                </div>
+                <div className={styles.count}>
+                  <div
+                    onClick={() => {
+                      Decr(el.id);
+                    }}
+                    className={styles.decr}
+                  >
+                    -
+                  </div>
+                  <div className={styles.bottom__count}>{el.count}</div>
+                  <div onClick={() => {
+                      Incr(el.id);
+                    }} className={styles.incr}>
+                    +
+                  </div>
+                </div>
+                <div
+                  onClick={() => {
+                    deleteItem(el.id);
+                  }}
+                  className={styles.closeIcon}
+                >
+                  <CloseIcon />
+                </div>
               </div>
             </div>
-            <div className={styles.bottom__right}>
-              <div className={styles.bottom__price}>74,000 сум</div>
-              <div className={styles.count}>
-                <div className={styles.decr}>-</div>
-                <div className={styles.bottom__count}>1</div>
-                <div className={styles.incr}>+</div>
-              </div>
-              <CloseIcon />
-            </div>
-          </div>
+          ))}
           <div className={styles.line}></div>
         </div>
 
-        {/* ==== RIGHT SIDE === */}
+        {/* ======================= RIGHT ============================ */}
         <div className={styles.right}>
           <div className={styles.title}>Ваш заказ</div>
           <div className={styles.line}></div>
-          <div className={styles.all__orders}>
-            <div className={styles.all__products}>
-              <div className={styles.pizza__name}>1 x Пицца кебаб</div>
-              <div className={styles.price}>74 000 сум</div>
-            </div>
-          </div>
-          <div className={styles.line}></div>
+          {data.map((el) => (
+            <>
+              <div className={styles.all__orders}>
+                <div className={styles.all__products}>
+                  <div className={styles.pizza__name}>
+                    {el.count} x {el.title}
+                  </div>
+                  <div className={styles.price}>{el.price * count}</div>
+                </div>
+              </div>
+              <div className={styles.line}></div>
+            </>
+          ))}
           <div className={styles.delivery}>
-            <div className={styles.deli}>Доставка</div>
-            <div className={styles.full__price}>0 сум</div>
+            <div className={styles.deli}>Доставка:</div>
+            <div className={styles.full__price}>20 000 сум</div>
           </div>
           <div className={styles.main__price}>
-            <div>Итого</div>
-            <div>148 000 сум</div>
+            <div>Итого: </div>
+            <div> сум</div>
           </div>
           <div className={styles.line}></div>
           <Button

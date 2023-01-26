@@ -5,6 +5,7 @@ import Home from "../components/Home/Home";
 import Layout from "../components/Layout/Layout";
 import NotFound from "../components/NotFound/NotFound";
 import Filial from "../components/Filial/Filial";
+import Korzinka from "../components/Korzinka/Korzinka";
 
 export const routes = [
   {
@@ -34,6 +35,10 @@ export const routes = [
       {
         path: "notfound",
         element: <NotFound />,
+      },
+      {
+        path: "korzinka",
+        element: <Korzinka />,
       },
     ],
   },

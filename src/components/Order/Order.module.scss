@@ -14,9 +14,15 @@
   grid-template-columns: auto 1fr;
   border-radius: 12px;
 
+  img{
+    width: 100%;
+    object-fit: cover;
+  }
+
   // .order__image
 
   &__image {
+    // text-transform: lowercase;
   }
 
   // .order__content

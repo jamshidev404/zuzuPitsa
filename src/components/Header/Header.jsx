@@ -10,8 +10,13 @@ import language from "../../Images/uzbekistan 1.jpg";
 import React from "react";
 import Button from "../Button/Button";
 import Burger from "../Burger/Burger";
+import Korzinka from "../Korzinka/Korzinka";
+import { Context } from "../Home/Home";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ product, onClickClose, addToOrders }) {
+  // const { onProductButtonClick } = useContext(Context);
   return (
     <div className={styles.header__wrapper}>
       <div className={styles.container}>
@@ -31,10 +36,14 @@ function Header() {
             </div>
           </div>
           <div className={styles.header__right}>
-            <Button variant='header'>
-              <KorzinkaSvg />
-              Корзина
-            </Button>
+            <div>
+              <Link to='/korzinka'>
+                <Button on variant='header'>
+                  <KorzinkaSvg />
+                  Корзина
+                </Button>
+              </Link>
+            </div>
             <Button variant='header'>
               <img src={language} />
               <StrelkaSvg />
