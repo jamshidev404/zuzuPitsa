@@ -1,24 +1,51 @@
 import { createContext, useState } from "react";
-import Korzinka from "../Korzinka/Korzinka";
 import Banner from "../Banner/Banner";
 import CardComponent from "../CardComponent/CardComponent";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "@mui/material/Modal";
 import Order from "../Order/Order";
-import { addOrderAction, getProductsAction } from "../../redux/productReducer";
+import {
+  addOrderAction,
+  getProductsAction,
+  setCategoriesAction,
+} from "../../redux/productReducer";
 import axios from "axios";
 import { useEffect } from "react";
+import Spinner from "../Loader/Loader";
+import Category from "../Category/Category";
+import { instance } from "../API/Axios";
+import { getProducts } from "../API/services/productServices";
+import { getCategories } from "../API/services/categoryServices";
 
 export const Context = createContext(null);
 
 const Home = () => {
+  const dispatch = useDispatch();
   const data = useSelector((state) => state.products.data);
-  // const orders = useSelector((state) => state.products.orders);
   const [currentProduct, setcurrentProduct] = useState({});
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getProducts()
+      .then((response) => {
+        console.log();
+        dispatch(getProductsAction(response.data));
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+   getCategories()
+      .then((response) => {
+        dispatch(setCategoriesAction(response.data));
+      });
+  }, []);
 
   const formatCategories = (arr) => {
     const categories = arr.reduce(
@@ -50,38 +77,32 @@ const Home = () => {
     handleClose();
   };
 
-  useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products")
-      .then((response) => {
-        console.log();
-        dispatch(getProductsAction(response.data));
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }, []);
-
   const states = {
     handleOpen,
     onProductButtonClick,
     addToOrders,
   };
 
-  const getting = formatCategories(data);
+  const formatAllCategories = formatCategories(data);
   return (
     <>
       <Context.Provider value={states}>
         {/* <SideBar /> */}
 
         <Banner />
-        {getting?.map((el) => (
-          <CardComponent
-            key={el?.category}
-            category={el?.category}
-            products={el?.products}
-          />
-        ))}
+        <Category />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          formatAllCategories?.map((el) => (
+            <CardComponent
+              id={el?.category}
+              key={el?.id}
+              category={el?.category}
+              products={el?.products}
+            />
+          ))
+        )}
         <Modal
           open={open}
           onClose={handleClose}

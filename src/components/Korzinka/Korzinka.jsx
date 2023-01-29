@@ -54,7 +54,7 @@ const Korzinka = () => {
               </div>
               <div className={styles.bottom__right}>
                 <div className={styles.bottom__price}>
-                  {el.price * count} so'm
+                  {el.price * el.count} so'm
                 </div>
                 <div className={styles.count}>
                   <div
@@ -97,7 +97,7 @@ const Korzinka = () => {
                   <div className={styles.pizza__name}>
                     {el.count} x {el.title}
                   </div>
-                  <div className={styles.price}>{el.price * count}</div>
+                  <div className={styles.price}>{el.price * el.count}</div>
                 </div>
               </div>
               <div className={styles.line}></div>

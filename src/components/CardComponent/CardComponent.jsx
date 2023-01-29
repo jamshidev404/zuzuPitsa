@@ -3,11 +3,11 @@ import styles from "./CardComponent.module.scss";
 import Button from "../Button/Button";
 import { Context } from "../Home/Home";
 
-function CardComponent({ category, products }) {
+function CardComponent({ category, products, id }) {
   const { onProductButtonClick } = useContext(Context);
   return (
     <>
-      <div className={styles.products}>
+      <div className={styles.products} id={id}>
         <div className={`${styles.products__container}`}>
           <div className={styles.title}>{category}</div>
           <div className={styles.items}>
@@ -43,13 +43,3 @@ function CardComponent({ category, products }) {
 }
 
 export default CardComponent;
-
-/* <div>
-        <Button variant='components'>Пицца</Button>
-        <Button variant='components'>Паста</Button>
-        <Button variant='components'>Салаты</Button>
-        <Button variant='components'>Напитки</Button>
-        <Button variant='components'>Синнамон роллы</Button>
-        <Button variant='components'>Гарниры</Button>
-        <Button variant='components'>Соусы</Button>
-      </div> */
